@@ -1,0 +1,4 @@
+export default Actions = {
+  UPDATE_TEST: 'UPDATE_TEST',
+  UPDATE_LANGUAGE:"UPDATE_LANGUAGE"
+};

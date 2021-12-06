@@ -1,0 +1,43 @@
+//ios function 
+
+#import <RNCAsyncStorage/RNCAsyncStorage.h>
+- (NSString *)getLanguageithBridge:(RCTBridge *)bridge
+{
+  __block NSString  *languageRes = @"None";
+  
+  RNCAsyncStorage *asyncStorage = [bridge moduleForClass:[RNCAsyncStorage class]];
+  
+  dispatch_sync(asyncStorage.methodQueue, ^{
+    [asyncStorage multiGet:@[@"language"] callback:^(NSArray *response) {
+      if (![response[0] isKindOfClass:[NSError class]] && ![response[1][0][1] isKindOfClass:[NSNull class]]) {
+        
+              NSString *tempLanguge = response[1][0][1];
+        languageRes = [tempLanguge length] == 0 ? @"None" : d;
+             }
+       
+    }];
+  });
+  
+  return languageRes;
+}
+NSString *region = [self getLanguageithBridge:bridge];
+  if([region isEqual:@"ar"]){
+    
+     [[RCTI18nUtil sharedInstance] forceRTL:YES];
+   }
+else {[[RCTI18nUtil sharedInstance] forceRTL:NO];}
+
+// android 
+import android.database.sqlite.SQLiteDatabase;
+import com.facebook.react.modules.i18nmanager.I18nUtil;
+import com.reactnativecommunity.asyncstorage.AsyncLocalStorageUtil;
+import com.reactnativecommunity.asyncstorage.ReactDatabaseSupplier;
+
+
+SQLiteDatabase readableDatabase = null;
+      readableDatabase = ReactDatabaseSupplier.getInstance(this.getApplicationContext()).getReadableDatabase();
+      if (readableDatabase != null) {
+          String impl = AsyncLocalStorageUtil.getItemImpl(readableDatabase, "language");
+          
+      }
+
