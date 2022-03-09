@@ -13,11 +13,9 @@ class Main extends React.Component {
     this.state = {
 
     };
-    const { i18n, language } = props;
-    if (i18n.language !== language) {
-      i18n.changeLanguage(language);
-    }
+
   }
+  
   componentDidMount() {
     SplashScreen.hide();
   }
